@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#define OFFSET  3
+/* FOR CHANGE */
+#define OFFSET 3  // Offset for extraction
+#define LINES  3  // Number of lines for extract
 
 int main(int argc, char const *argv[])
 {
@@ -17,22 +19,22 @@ int main(int argc, char const *argv[])
     }
 
     char filename[FILENAME_MAX];
-    snprintf(filename, sizeof(filename), "(1)%s", argv[1]);
+    snprintf(filename, sizeof(filename), "(edited) %s", argv[1]);
 
     FILE *f_to = fopen(filename, "w");
 
     char buffer[1024];
-    int line = 0;
+    int line_count = 1;
 
     while (fgets(buffer, sizeof(buffer), f_from)) {
-        if (line == OFFSET) {
+        int position_in_cycle = ((line_count - 1) % (OFFSET + LINES)) + 1;
+        if (position_in_cycle > OFFSET && position_in_cycle <= OFFSET + LINES) {
             fprintf(f_to, "%s", buffer);
-            line = -1;
         }
-        line++;
+        line_count++;
     }
 
     fclose(f_from);
     fclose(f_to);
     return 0;
-}
+}   
