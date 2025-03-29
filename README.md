@@ -1,17 +1,16 @@
 # Line Extractor
 
-This is a simple C program that extracts a specific line from a text file and saves it to a new file.
+This is a simple C program that extracts specific lines from a text file based on an offset and a number of lines to extract. The extracted lines are saved to a new file.
 
 ## Description
 
-The program reads an input text file and writes the 3rd line (by default) to a new output file. The output filename is prefixed with "(edited)" to distinguish it from the original file.
+The program reads one or more input text files and writes the extracted lines to new output files. Each output filename is prefixed with "(extracted)" to distinguish it from the original file.
 
 ## Features
 
-- Extracts a specific line from a text file (3rd line by default)
-- Creates a new file with the extracted line
-- Handles file opening errors gracefully
-- Simple command-line interface
+- Extracts lines from a text file based on a configurable offset and number of lines.
+- Processes multiple files in a single run.
+- Creates new files with the extracted lines.
 
 ## Usage
 
@@ -20,18 +19,19 @@ The program reads an input text file and writes the 3rd line (by default) to a n
    gcc -o line_extractor line_extractor.c
    ```
 
-2. Run the program with an input file:
+2. Run the program with one or more input files:
    ```bash
-   ./line_extractor file.txt
+   ./line_extractor file1.txt file2.txt
    ```
 
-3. The program will create a new file named "(edited)file.txt" containing the 3rd line from the original file.
+3. The program will create new files named "(extracted) file1.txt", "(extracted) file2.txt", etc., containing the extracted lines.
 
 ## Configuration
 
-You can change which line is extracted by modifying the `OFFSET` constant in the source code:
+You can modify the constants `OFFSET` and `LINES` in the source code to adjust the behavior:
 ```c
-#define OFFSET 3  // Change this value to extract a different line
+#define OFFSET <value> // The number of lines to skip before starting extraction.
+#define LINES  <value> // The number of lines to extract after the offset.
 ```
 
 ## Requirements
@@ -41,5 +41,6 @@ You can change which line is extracted by modifying the `OFFSET` constant in the
 
 ## Notes
 
-- If the input file has fewer lines than the specified offset, the output file will be empty
-- The program handles basic error cases (missing file argument, unreadable files)
+- If the input file has fewer lines than the specified offset, the output file will be empty.
+- The program handles basic error cases, such as missing file arguments or unreadable files.
+- The program processes each file independently, creating separate output files for each input file.
