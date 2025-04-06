@@ -9,8 +9,11 @@ The program reads one or more input text files and writes the extracted lines to
 ## Features
 
 - Extracts lines from a text file based on a configurable offset and number of lines.
+- Supports merging extracted lines into a single line separated by spaces.
 - Processes multiple files in a single run.
 - Creates new files with the extracted lines.
+
+---
 
 ## Usage
 
@@ -26,13 +29,18 @@ The program reads one or more input text files and writes the extracted lines to
 
 3. The program will create new files named "(extracted) file1.txt", "(extracted) file2.txt", etc., containing the extracted lines.
 
+---
+
 ## Configuration
 
-You can modify the constants `OFFSET` and `LINES` in the source code to adjust the behavior:
+You can modify the constants `OFFSET`, `LINES`, and `MERGE_LINES` in the source code to adjust the behavior:
 ```c
-#define OFFSET <value> // The number of lines to skip before starting extraction.
-#define LINES  <value> // The number of lines to extract after the offset.
+#define OFFSET       3        // The number of lines to skip before starting extraction.
+#define LINES        1        // The number of lines to extract after the offset.
+#define MERGE_LINES  true     // If true, the extracted lines will be merged into a single line separated by spaces.
 ```
+
+---
 
 ## Requirements
 
@@ -44,3 +52,4 @@ You can modify the constants `OFFSET` and `LINES` in the source code to adjust t
 - If the input file has fewer lines than the specified offset, the output file will be empty.
 - The program handles basic error cases, such as missing file arguments or unreadable files.
 - The program processes each file independently, creating separate output files for each input file.
+- When `MERGE_LINES` is enabled, a newline character is added at the end of the merged line.
