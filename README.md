@@ -53,3 +53,33 @@ You can modify the constants `OFFSET`, `LINES`, and `MERGE_LINES` in the source 
 - The program handles basic error cases, such as missing file arguments or unreadable files.
 - The program processes each file independently, creating separate output files for each input file.
 - When `MERGE_LINES` is enabled, a newline character is added at the end of the merged line.
+
+---
+
+## Example
+
+Given an input file `example.txt` with the following content:
+
+```
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+Line 7
+Line 8
+Line 9
+```
+
+And running the program with `OFFSET` set to 1 and `LINES` set to 1:
+
+```bash
+./line_extractor example.txt
+```
+
+The output file `(extracted) example.txt` will contain:
+
+```
+Line 1 Line 3 Line 5 Line 7 Line 9
+```
